@@ -5,3 +5,6 @@ R187501W     Ngonidzashe Zuze  CTHSC<br>
 
 # news-credibility-predictor
 This is an application that predicts if a given news article is credible or not.
+
+## A test set
+We have provided some data to test the two models in the data folder. You could use those.
