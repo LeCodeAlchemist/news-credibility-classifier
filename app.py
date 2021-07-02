@@ -150,22 +150,33 @@ else:
                 submitted = st.form_submit_button("Classify")
 
             if submitted:
-                st.write("## Prediction")
-                input_text = author + ' ' + post + ' ' + source
-                input_text_clean = get_clean_text(input_text)
-                input_text_vec = posts_vect.transform([input_text_clean])
-                prediction = posts_classifier.predict(input_text_vec)
-                prediction_prob = posts_classifier.predict_proba(input_text_vec)
-                prob_df = pd.DataFrame(prediction_prob, columns=["Probablity(Not Credible)", "Probability(Credible)"])
+                if author.strip() and post.strip() and source.strip():
+                    st.write("## Prediction")
+                    input_text = author + ' ' + post + ' ' + source
+                    input_text_clean = get_clean_text(input_text)
+                    input_text_vec = posts_vect.transform([input_text_clean])
+                    prediction = posts_classifier.predict(input_text_vec)
+                    prediction_prob = posts_classifier.predict_proba(input_text_vec)
+                    prob_df = pd.DataFrame(prediction_prob, columns=["Probablity(Not Credible)", "Probability(Credible)"])
 
-                if prediction[0] == 0:
-                    st.write("The classification result was ", prediction[0])
-                    st.write("This means the provided news post is ** Not Credible **")
-                    st.dataframe(prob_df)
+                    if prediction[0] == 0:
+                        st.write("The classification result was ", prediction[0])
+                        st.write("This means the provided news post is ** Not Credible **")
+                        st.dataframe(prob_df)
+                    else:
+                        st.write("The classification result was ", prediction[0])
+                        st.write("This means the provided news post is ** Credible **")
+                        st.dataframe(prob_df)
+
                 else:
-                    st.write("The classification result was ", prediction[0])
-                    st.write("This means the provided news post is ** Credible **")
-                    st.dataframe(prob_df)
+                    if not author.strip():
+                        st.warning("Please enter something in the ** Author ** field")
+
+                    if not post.strip():
+                        st.warning("Please enter something in the ** Post ** field")
+
+                    if not source.strip():
+                        st.warning("Please enter something in the ** Source ** field")
 
     else:
         st.write("## Articles Classifier")
@@ -227,19 +238,31 @@ else:
                 submitted = st.form_submit_button("Classify")
 
             if submitted:
-                st.write("## Prediction")
-                input_text = title + ' ' + author + ' ' + text
-                input_text_clean = get_clean_text(input_text)
-                input_text_vec = articles_vect.transform([input_text_clean])
-                prediction = articles_classifier.predict(input_text_vec)
-                prediction_prob = articles_classifier.predict_proba(input_text_vec)
-                prob_df = pd.DataFrame(prediction_prob, columns=["Probablity(Not Credible)", "Probability(Credible)"])
+                if title.strip() and author.strip() and text.strip():
 
-                if prediction[0] == 1:
-                    st.write("The classification result was ", prediction[0])
-                    st.write("This means the provided news post is ** Not Credible **")
-                    st.dataframe(prob_df)
+                    st.write("## Prediction")
+                    input_text = title + ' ' + author + ' ' + text
+                    input_text_clean = get_clean_text(input_text)
+                    input_text_vec = articles_vect.transform([input_text_clean])
+                    prediction = articles_classifier.predict(input_text_vec)
+                    prediction_prob = articles_classifier.predict_proba(input_text_vec)
+                    prob_df = pd.DataFrame(prediction_prob, columns=["Probablity(Credible)", "Probability(Not Credible)"])
+
+                    if prediction[0] == 1:
+                        st.write("The classification result was ", prediction[0])
+                        st.write("This means the provided news post is ** Not Credible **")
+                        st.dataframe(prob_df)
+                    else:
+                        st.write("The classification result was ", prediction[0])
+                        st.write("This means the provided news post is ** Credible **")
+                        st.dataframe(prob_df)
+
                 else:
-                    st.write("The classification result was ", prediction[0])
-                    st.write("This means the provided news post is ** Credible **")
-                    st.dataframe(prob_df)
+                    if not title.strip():
+                        st.warning("Please enter something in the ** Title ** field")
+
+                    if not author.strip():
+                        st.warning("Please enter something in the ** Author ** field")
+
+                    if not text.strip():
+                        st.warning("Please enter something in the ** Article text ** field")
