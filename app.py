@@ -56,7 +56,7 @@ def vectorize(text, vocab):
 
 # Main Header
 st.write("""
-# News Credibility Prediction 
+# News Credibility Classification 
 This app classifies if a given news article or news post from social media is credible or not.
 """)
 
@@ -113,7 +113,7 @@ else:
                 st.write("The .csv file that you provided does not have the appropriate columns")
                 st.write("Please upload a proper .csv file")
 
-            st.write("### First 5 columns of the Input DataFrame")
+            st.write("### First 5 rows of the Input DataFrame")
             st.dataframe(input_df.head())
 
             # fill in missing values with spaces
@@ -151,7 +151,7 @@ else:
 
             if submitted:
                 if author.strip() and post.strip() and source.strip():
-                    st.write("## Prediction")
+                    st.write("## Classification Result(s)")
                     input_text = author + ' ' + post + ' ' + source
                     input_text_clean = get_clean_text(input_text)
                     input_text_vec = posts_vect.transform([input_text_clean])
@@ -201,7 +201,7 @@ else:
                 st.write("The .csv file that you provided does not have the appropriate columns")
                 st.write("Please upload a proper .csv file")
 
-            st.write("### First 5 columns of the Input DataFrame")
+            st.write("### First 5 rows of the Input DataFrame")
             st.dataframe(input_df.head())
 
             # fill in missing values with spaces
@@ -240,7 +240,7 @@ else:
             if submitted:
                 if title.strip() and author.strip() and text.strip():
 
-                    st.write("## Prediction")
+                    st.write("## Classification results")
                     input_text = title + ' ' + author + ' ' + text
                     input_text_clean = get_clean_text(input_text)
                     input_text_vec = articles_vect.transform([input_text_clean])
