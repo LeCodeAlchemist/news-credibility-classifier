@@ -9,7 +9,7 @@ This is application classifies a news piece as being credible or not credible. A
 ## Link to the live application on Heroku
 [https://news-credibility-classifier.herokuapp.com/](https://news-credibility-classifier.herokuapp.com/)
 
-## Link to the live application on Heroku
+## Link to the explanation video
 [https://drive.google.com/file/d/1T4qeZkhrgRxCe2oOu8IcS16FsdahNg3I/view?usp=sharing](https://drive.google.com/file/d/1T4qeZkhrgRxCe2oOu8IcS16FsdahNg3I/view?usp=sharing)
 
 ## A test set
